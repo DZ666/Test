@@ -4,12 +4,11 @@ const path = require('path');
 
 const umzug = new Umzug({
   migrations: {
-    path: path.join(__dirname, '../migrations'),
-    params: [sequelize.getQueryInterface()]
+    glob: 'src/migrations/*.js',
   },
   context: sequelize.getQueryInterface(),
   storage: new SequelizeStorage({ sequelize }),
-  logger: console
+  logger: console,
 });
 
 module.exports = umzug; 

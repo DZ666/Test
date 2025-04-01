@@ -15,14 +15,13 @@ class BalanceService {
       throw new Error('Недостаточно средств на балансе');
     }
 
-    // Используем атомарное обновление с проверкой текущего баланса
     const [updatedUser] = await User.update(
       { balance: newBalance },
       {
         where: {
           id: userId,
           balance: {
-            [Op.gte]: -amount // Проверяем, что текущий баланс достаточен
+            [Op.gte]: -amount
           }
         },
         returning: true

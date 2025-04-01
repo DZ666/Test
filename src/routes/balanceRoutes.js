@@ -5,6 +5,27 @@ const { updateBalanceValidator } = require('../validators/balanceValidator');
 
 const router = express.Router();
 
+/**
+ * @swagger
+ * /balance/update:
+ *   post:
+ *     summary: Обновление баланса пользователя
+ *     description: Обновляет баланс пользователя на указанную сумму
+ *     tags:
+ *       - balance
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               userId:
+ *                 type: integer
+ *                 description: ID пользователя
+ *               amount:
+ *                 type: number
+ */
 router.post('/update', updateBalanceValidator, async (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {

@@ -1,8 +1,8 @@
 const { DataTypes } = require('sequelize');
 
 module.exports = {
-  up: async (queryInterface) => {
-    await queryInterface.createTable('users', {
+  async up({ context }, _Sequelize) {
+    await context.createTable('users', {
       id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -23,15 +23,14 @@ module.exports = {
       }
     });
 
-    // Создаем начального пользователя с балансом 10000
-    await queryInterface.bulkInsert('users', [{
+    await context.bulkInsert('users', [{
       balance: 10000,
       createdAt: new Date(),
       updatedAt: new Date()
     }]);
   },
 
-  down: async (queryInterface) => {
-    await queryInterface.dropTable('users');
+  async down({ context }, _Sequelize) {
+    await context.dropTable('users');
   }
 }; 
